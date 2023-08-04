@@ -1,6 +1,6 @@
 ---
 title: "From pandemic to endemic: summer 2022 divergence of COVID-19 case numbers and SARS-CoV-2 RNA detection in wastewaters of Rochester, Minnesota"
-author: "Dr Biruhalem Taye"
+author: "Dr. Biruhalem Taye"
 date: "04/07/2023"
 output:
   pdf_document: default
@@ -33,7 +33,7 @@ library(ggplot2)
 ```{r}
 #loading data
 
-alldata <- read.csv("C:/Users/biruh/Desktop/Wastwater/Figuresversion2/2023Alldatarefined.csv")
+alldata <- read.csv("C:/Users/biruh/Desktop/Wastwater/Figuresversion2_V2/2023Alldatarefined.csv")
 
 #head(alldata) 
 
@@ -68,7 +68,7 @@ from matplotlib.dates import (AutoDateLocator, YearLocator, MonthLocator,
 
 ```
 
-#Rochester trend analysis (Figure 4A)
+#Rochester trend analysis (Fig 3A)
 
 ```{python}
 # Creating plot with cases
@@ -86,7 +86,7 @@ ax1.tick_params(axis = 'x', rotation=30, labelsize = 16)
 #ax1.set_tick_params(axis = 'x', weight = 'bold')
 ax1.tick_params(axis ='y', labelcolor = color, labelsize = 18)
 ax1.axvline(pd.to_datetime('2022-04-25'), color='g', linestyle='--', lw=1)
-ax1.axvline(pd.to_datetime('2022-08-31'), color='r', linestyle='--', lw=1)
+ax1.axvline(pd.to_datetime('2022-09-15'), color='r', linestyle='--', lw=1) # change point 
 
 
 # Adding Twin Axes to plot using dataset_2
@@ -108,7 +108,7 @@ plt.show()
 ```
 
 
-#Byron trend analysis (Figure 4B)
+#Byron trend analysis (Fig 3B)
 
 ```{python}
 # Creating plot with cases
@@ -125,8 +125,8 @@ ax1.bar(r.alldata.Days, r.alldata.Byron_Cases, color = color)
 ax1.tick_params(axis = 'x', rotation=30, labelsize = 16)
 #ax1.set_tick_params(axis = 'x', weight = 'bold')
 ax1.tick_params(axis ='y', labelcolor = color, labelsize = 18)
-ax1.axvline(pd.to_datetime('2022-04-25'), color='g', linestyle='--', lw=1)
-ax1.axvline(pd.to_datetime('2022-08-31'), color='r', linestyle='--', lw=1)
+ax1.axvline(pd.to_datetime('2022-04-25'), color='g', linestyle='--', lw=1) 
+ax1.axvline(pd.to_datetime('2022-09-27'), color='r', linestyle='--', lw=1) # change point
 
 
 # Adding Twin Axes to plot using dataset_2
@@ -148,7 +148,7 @@ plt.show()
 ```
 
 
-#Stewartville trend analysis (Figure 4C)
+#Stewartville trend analysis (Fig 3C)
 
 ```{python}
 # Creating plot with cases
@@ -166,7 +166,7 @@ ax1.tick_params(axis = 'x', rotation=30, labelsize = 16)
 #ax1.set_tick_params(axis = 'x', weight = 'bold')
 ax1.tick_params(axis ='y', labelcolor = color, labelsize = 18)
 ax1.axvline(pd.to_datetime('2022-04-25'), color='g', linestyle='--', lw=1)
-ax1.axvline(pd.to_datetime('2022-08-31'), color='r', linestyle='--', lw=1)
+ax1.axvline(pd.to_datetime('2022-05-31'), color='r', linestyle='--', lw=1) # Change point 
 
 
 # Adding Twin Axes to plot using dataset_2
@@ -212,6 +212,8 @@ Based on Shapiro-Wilk normality test all the data are not normally distributed, 
 
 Correlation of SARS-CoV-2 in wastewater using nucleocapsid target sequences N1 and N2 
 
+#Supplementary Figure 2
+
 ```{r}
 p1_n <- ggscatter(alldata, x = "Rochester_N1", y = "Rochester_N2", 
           add = "reg.line", conf.int = TRUE, 
@@ -230,8 +232,9 @@ figS1
 ```
 
 
-**Rochester overall data correlation**  
+**Rochester SARS-CoV-2 and COVID-19 cases correlation: Overall**  
 
+#Fig 5A
 
 ```{r}
 Rall <- ggscatter(alldata, x = "Rochester_Cases", y = "Rochester_SARS", 
@@ -249,7 +252,8 @@ Rall_1 <- Rall + theme(axis.title = element_text(size = 22),
 Rall_1
 ```
  
-**Rochester data correlation before 2022-04-25** 
+**Rochester data correlation before change in case reporting guideline 2022-04-25** 
+# Fig 5B
 
 ```{r}
 
@@ -275,8 +279,9 @@ Rall_b1
 
 ```
 
-
 **Rochester data correlation after 2022-04-25**
+
+#Fig 5C
 
 ```{r}
 alldata_after <- alldata %>% filter(Days > '2022-04-25')
@@ -303,6 +308,7 @@ Rall_a1
 
 **Byron data correlation overall (after 2021-06-15)**
 
+#Supplementary Figure 4A
 
 ```{r}
 Byron_all <- alldata %>% filter(Days >= '2021-06-15')
@@ -329,6 +335,7 @@ Byall_1
 
 **Byron data correlation before 2022-04-25**
 
+#Supplementary Figure 4B
 
 ```{r}
 Byron_before <- alldata %>% filter(dplyr::between(Days, as.Date('2021-06-15'), as.Date('2022-04-25')))
@@ -354,6 +361,7 @@ Bybefore1
 
 **Byron data correlation after 2022-04-25**
 
+#Supplementary Figure 4C
 
 ```{r}
 Byron_after <- alldata %>% filter(Days > '2022-04-25')
@@ -379,6 +387,8 @@ Byafter1
 
 
 **Stewartville overall data correlation (after 2021-05-25)**
+
+#Supplementary Figure 5A
 
 
 ```{r}
@@ -406,6 +416,8 @@ Stewall1
 
 **Stewartville data correlation before 2022-04-25 and (after 2021-05-25)**
 
+#Supplementary Figure 5B
+
 ```{r}
 stew_before <- alldata %>% filter(dplyr::between(Days, as.Date('2021-05-25'), as.Date('2022-04-25')))
 
@@ -426,6 +438,8 @@ Stewbefore
 ```
 
 **Stewartville data correlation after 2022-04-25** 
+
+#Supplementary Figure 5C
 
 
 ```{r}
@@ -449,6 +463,133 @@ stewafter <- stewafter + theme(axis.title = element_text(size = 22),
 stewafter
 ```
 
+**SARS-CoV-2 concentration in wastewater and COVID-19 hospitalizations**
+
+```{r}
+#loading data 
+alldata_hos <- read.csv("C:/Users/biruh/Desktop/Wastwater/Figuresversion2_v2/2023Alldatarefined_hostpitalization.csv")
+
+head(alldata_hos) 
+
+#Converting character data to date to be recognized by R 
+
+alldata_hos$Days <- as.Date(alldata$Days,"%m/%d/%Y")
+
+library(dplyr)
+alldata_hos$Weekday <- format(alldata$Days, '%A')
+
+head(alldata_hos)
+```
+
+
+Rochester trend SARS-CoV-2 in wastewater vs Hospitalization
+
+#Fig 6A
+
+```{python}
+# Creating plot with cases
+fig, ax1 = plt.subplots(figsize=(12, 8))
+
+
+color = 'tab:blue'
+#ax1.set_xlabel('Weeks')
+ax1.set_ylabel('Daily COVID-19 hospitalization', fontsize=20, fontweight = "bold", color = color)
+ax1.bar(r.alldata_hos.Days, r.alldata_hos.Rochester_NewHosp, color = color)
+#ax1.xaxis.set_major_locator(mdates.ConciseDateFormatter())
+#ax1.xaxis.set_major_locator(mdates.MonthLocator())
+#ax1.xaxis.set_major_formatter(mdates.DateFormatter('%b %Y'))
+ax1.tick_params(axis = 'x', rotation=30, labelsize = 16)
+#ax1.set_tick_params(axis = 'x', weight = 'bold')
+ax1.tick_params(axis ='y', labelcolor = color, labelsize = 18)
+ax1.axvline(pd.to_datetime('2022-04-25'), color='g', linestyle='--', lw=1)
+ax1.axvline(pd.to_datetime('2022-09-15'), color='r', linestyle='--', lw=1) # change points 
+
+
+# Adding Twin Axes to plot using dataset_2
+ax2 = ax1.twinx()
+ 
+color = 'tab:red'
+ax2.set_ylabel('SARS-CoV-2 in wastewater', fontsize=20, fontweight ="bold", color = color)
+ax2.scatter(r.alldata_hos.Days, r.alldata_hos.Rochester_SARS, color = color)
+ax2.tick_params(axis ='y', labelcolor = color, labelsize = 18)
+
+# Adding title
+
+#plt.title('Rochester daily COVID-19 cases vs SARS-CoV-2 in Wastwater ', fontweight ="bold")
+
+plt.savefig('Rochester_daily_Hospital_bar_scatter_cpt.png') 
+# Show plot
+plt.show()
+```
+
+
+#Correlation of SARS-CoV-2 in wastewater vs Rochester Hospitilization overall
+
+```{r}
+Rall_hosp_all <- ggscatter(alldata_hos, x = "Rochester_NewHosp", y = "Rochester_SARS", 
+          add = "reg.line", conf.int = TRUE, 
+          cor.coef = TRUE, cor.method = "spearman",
+          add.params = list(color = "blue", fill = "lightgray"),
+          xlab = "Daily COVID-19 hospitilization", ylab = "SARS-CoV-2 in wastewater",
+          size = 2,
+          cor.coef.size = 8,
+          cor.coef.font = c(24, "bold", "black"),
+          pvalue.font = c(24, "bold", "black"))
+
+Rall_hosp_all1 <- Rall_hosp_all + theme(axis.title = element_text(size = 22),
+             axis.text = element_text(size = 22))
+Rall_hosp_all1
+
+```
+
+#Correlation of SARS-CoV-2 in wastewater vs Rochester Hospitilization before 2022-04-25
+
+#Fig 6B
+
+```{r}
+alldata_hos_before <- alldata_hos %>% filter(Days <= '2022-04-25')
+tail(alldata_hos_before)
+
+Rall_hosp <- ggscatter(alldata_hos_before, x = "Rochester_NewHosp", y = "Rochester_SARS", 
+          add = "reg.line", conf.int = TRUE, 
+          cor.coef = TRUE, cor.method = "spearman",
+          add.params = list(color = "blue", fill = "lightgray"),
+          xlab = "Daily COVID-19 hospitilization", ylab = "SARS-CoV-2 in wastewater",
+          size = 2,
+          cor.coef.size = 8,
+          cor.coef.font = c(24, "bold", "black"),
+          pvalue.font = c(24, "bold", "black"))
+
+Rall_hosp1 <- Rall_hosp + theme(axis.title = element_text(size = 22),
+             axis.text = element_text(size = 22))
+Rall_hosp1
+
+
+```
+
+#Correlation of SARS-CoV-2 in wastewater vs Rochester Hospitilization after 2022-04-25
+
+#Fig 6C
+
+```{r}
+alldata_hos_after <- alldata_hos %>% filter(Days > '2022-04-25')
+tail(alldata_hos_after)
+
+Rall_hosp_a <- ggscatter(alldata_hos_after, x = "Rochester_NewHosp", y = "Rochester_SARS", 
+          add = "reg.line", conf.int = TRUE, 
+          cor.coef = TRUE, cor.method = "spearman",
+          add.params = list(color = "blue", fill = "lightgray"),
+          xlab = "Daily COVID-19 hospitilization", ylab = "SARS-CoV-2 in wastewater",
+          size = 2,
+          cor.coef.size = 8,
+          cor.coef.font = c(24, "bold", "black"),
+          pvalue.font = c(24, "bold", "black"))
+
+Rall_hosp2 <- Rall_hosp_a + theme(axis.title = element_text(size = 22),
+             axis.text = element_text(size = 22))
+Rall_hosp2
+
+```
 
 
 **Modeling**
@@ -535,15 +676,33 @@ summary(dlmFit1)
 
 **MODEL 2**
 
-**Autoregressive Distributed Lag (ARDL) model** (with p = 8)
+**Autoregressive Distributed Lag (ARDL) model** (with p = 15)
 
 
 ```{r}
 
-ARDLfit2 <- ardlDlm(x = pcr$N1_N2gflowadj, y = pcr$Daily_cases, p=8, q=15)
+ARDLfit2 <- ardlDlm(x = pcr$N1_N2gflowadj, y = pcr$Daily_cases, p=15, q=15)
 summary(ARDLfit2)
 
 ```
+
+
+**MODEL 3**
+
+**ARIMA Model**
+
+```{r}
+
+ARIMA <- auto.arima(pcr$Daily_cases, xreg = pcr$N1_N2gflowadj)
+summary(ARIMA)
+
+
+checkresiduals(ARIMA)
+
+accuracy(ARIMA)
+```
+
+
 
 
 **GOODNESS-OF-FIT MEASURES**
