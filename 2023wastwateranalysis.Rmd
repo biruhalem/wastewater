@@ -1,5 +1,5 @@
 ---
-title: "From pandemic to endemic: summer 2022 divergence of COVID-19 case numbers and SARS-CoV-2 RNA detection in wastewaters of Rochester, Minnesota"
+title: ""From pandemic to endemic: divergence of COVID-19 positive-tests and hospitilization numbers from SARS-CoV-2 RNA levels in wastewater of Rochester, Minnesota"
 author: "Dr. Biruhalem Taye"
 date: "04/07/2023"
 output:
